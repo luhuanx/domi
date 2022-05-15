@@ -1,18 +1,17 @@
 <template>
-    <div>
+    <layout>
         Labels.vue
-         <Nav></Nav>
-    </div>
+    </layout>
 </template>
 
 <script lang="ts">
-    import Vue from 'vue'
+    import Layout from '@/components/Layout.vue'
+import Vue from 'vue'
 
     export default Vue.extend({
+  components: { Layout },
         
     })
 </script>
 
-<style lang="scss" scoped>
 
-</style>
