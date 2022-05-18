@@ -2,7 +2,7 @@
     <nav>
       <router-link to="/money" class="item" active-class="selected">
         <Icon name='money'/>
-        记账
+        记一笔
       </router-link>
       <router-link to="/labels" class="item" active-class="selected">
       <Icon name='label'/>
