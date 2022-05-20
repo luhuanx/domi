@@ -7,7 +7,7 @@
         </div>
         <div class="form-wrapper">
             <FormItem :value="tag.name" 
-                @update:value="updateTag"
+                @update:value="update"
                 field-name="标签名" placeholder="请输入标签名"/>
         </div>
         <div class="button-wrapper">
@@ -16,7 +16,6 @@
     </Layout>
 </template>
 <script lang = 'ts'>
-    import tagListModel from '@/models/tagListModel';
     import Vue from 'vue';
     import {Component} from 'vue-property-decorator';
     import FormItem from '@/components/Money/FormItem.vue';
@@ -29,29 +28,26 @@
         tag: {id: string, name: string} = {id:'', name:''};
 
         created(){
-            const id = this.$route.params.id;
-            tagListModel.fetch();
-            const tags = tagListModel.data;
-            const tag = tags.filter(t => t.id === id)[0]
-            if(tag){
-                this.tag = tag;
-            }else {
+            this.tag = window.findTag(this.$route.params.id);
+            if(!this.tag){
                 this.$router.replace('/404');
             }
         }
 
-        updateTag(name: string){
+        update(name: string){
             if(this.tag){
-                tagListModel.update(this.tag.id, name);
+                window.updateTag(this.tag.id, name);
             }
         }
 
         remove(){
             if(this.tag){
-                if(tagListModel.remove(this.tag.id)){
-                    this.$router.back();
-                }  
-            } 
+               if(window.removeTag(this.tag.id)){
+                   this.$router.back();
+               } else{
+                   window.alert('删除失败');
+               }
+            }   
         }
 
         goBack(){
