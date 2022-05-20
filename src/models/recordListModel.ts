@@ -11,6 +11,7 @@ const recordListModel = {
         const record2: RecordItem = clone(record);
         record2.createAt = new Date();
         this.data.push(record2);
+        this.sava();
     },
     sava() {
         window.localStorage.setItem(localStorageName, JSON.stringify(this.data));
