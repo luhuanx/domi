@@ -51,7 +51,7 @@
 
         @Watch('recordList')
         onRecordListChange(){
-            recordListModel.sava(this.recordList);
+            recordListModel.sava();
         }
 
     }
