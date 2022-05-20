@@ -12,16 +12,23 @@
 </template>
 
 <script lang="ts">
+    type Tag = {
+        id: string
+        name: string
+    }
+
+    import createId from '@/lib/createId';
+    import tagListModel from '@/models/tagListModel';
     import Vue from 'vue';
     import {Component, Prop} from 'vue-property-decorator';
     
     @Component
     export default class Tags extends Vue {
-        @Prop() readonly dataSource: string[] | undefined;
-        selectedTags: string[] = [];
+        @Prop() readonly dataSource: Tag[] | undefined;
+        selectedTags: Tag[] = [];
         
-        toggle(tag: string){
-            const index = this.selectedTags.indexOf(tag);
+        toggle(tag: Tag){
+            const index = this.selectedTags.findIndex(t => t.id === tag.id);
             if(index>=0){
                 this.selectedTags.splice(index, 1);
             }else{
@@ -32,11 +39,14 @@
 
         create(){
             const name = window.prompt('请输入标签名');
-            if(name === ''){
-                window.alert('标签名不能为空');
+            if(name === '' || !name){
+              window.alert('标签名不能为空');
             }else if(this.dataSource){
-                    this.$emit('update:dataSource', 
-                    [...this.dataSource, name]);
+              tagListModel.create(name)
+              this.$emit(
+                'update:dataSource', 
+                [...this.dataSource, {id: createId().toString(), name}]
+              );
             }
                 
         }
