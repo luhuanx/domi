@@ -1,7 +1,7 @@
 <template>
     <div class="tags">
         <div class="new">
-            <button @click="create">新增标签</button>
+            <button @click="createTag">新增标签</button>
         </div>
         <ul class="current">
             <li v-for="tag in tagList" :key="tag.id"
@@ -12,18 +12,25 @@
 </template>
 
 <script lang="ts">
-    import createId from '@/lib/createId';
-    import store from '@/store/index2';
-    import Vue from 'vue';
-    import {Component, Prop} from 'vue-property-decorator';
+  import {Component, Prop} from 'vue-property-decorator';
+  import {mixins} from 'vue-class-component';
+  import TagHelper from '@/mixins/TagHelper';
+
     
     @Component
-    export default class Tags extends Vue {
-        tagList = store.fetchTags();
-        selectedTags: Tag[] = [];
+    export default class Tags extends mixins(TagHelper) {
+        selectedTags: string[] = [];
+
+        get tagList(){
+            return this.$store.state.tagList;
+        }
         
-        toggle(tag: Tag){
-            const index = this.selectedTags.findIndex(t => t.id === tag.id);
+        created() {
+            this.$store.commit('fetchTags');
+        }
+
+        toggle(tag: string){
+            const index = this.selectedTags.indexOf(tag);
             if(index>=0){
                 this.selectedTags.splice(index, 1);
             }else{
@@ -32,11 +39,6 @@
             this.$emit('update:value', this.selectedTags);
         }
 
-        create(){
-            const name = window.prompt('请输入标签名');
-            if(!name){return window.alert('标签名不能为空');}
-            store.createTag(name);   
-        }
     }
 </script>
 
