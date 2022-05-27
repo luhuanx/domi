@@ -33,7 +33,7 @@ const store = new Vuex.Store({
     },
     removeTag(state, id: string) {
       let index = -1;
-      for (let i = 0; i < this.tagList.length; i++) {
+      for (let i = 0; i < state.tagList.length; i++) {
         if (state.tagList[i].id === id) {
           index = i;
           break;
@@ -84,7 +84,6 @@ const store = new Vuex.Store({
       const id = createId().toString();
       state.tagList.push({ id, name: name });
       store.commit("saveTags");
-      window.alert("添加成功");
     },
     saveTags(state) {
       window.localStorage.setItem("tagList", JSON.stringify(state.tagList));
