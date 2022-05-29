@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 <template>
   <ul class="tabs"
       :class="{[classPrefix+'-tabs']:classPrefix}">

@@ -19,9 +19,10 @@
         </ol>
       </li>
     </ol>
-    <div v-else
-         class="noResult">
-      目前没有相关记录
+    <div v-else>
+      <img src="../assets/record.png">
+      <p class="noResult">暂时还没有记录，快去记一笔吧~</p>
+
     </div>
   </layout>
 </template>
@@ -33,6 +34,7 @@ import Tabs from '../components/Tabs.vue'
 import recordTypeList from '@/constants/recordTypeList'
 import dayjs from 'dayjs'
 import clone from '@/lib/clone'
+import Icon from '@/components/Icon.vue'
 
 @Component({
   components: { Tabs },
@@ -110,6 +112,14 @@ export default class Statistics extends Vue {
 </script>
 
 <style scoped lang="scss">
+img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
 .noResult {
   padding: 16px;
   text-align: center;

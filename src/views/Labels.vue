@@ -13,7 +13,6 @@
       <Button class="createTag"
               @click="createTag">新增标签</Button>
     </div>
-
   </layout>
 </template>
 <script lang = 'ts'>
