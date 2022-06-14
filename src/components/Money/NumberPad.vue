@@ -64,6 +64,7 @@ export default class NumberPad extends Vue {
   }
 
   ok() {
+    if (this.output === '0') return
     this.$emit('update:value', parseFloat(this.output))
     this.$emit('submit', parseFloat(this.output))
     this.output = '0'

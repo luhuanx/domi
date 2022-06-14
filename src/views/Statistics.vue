@@ -34,7 +34,6 @@ import Tabs from '../components/Tabs.vue'
 import recordTypeList from '@/constants/recordTypeList'
 import dayjs from 'dayjs'
 import clone from '@/lib/clone'
-import Icon from '@/components/Icon.vue'
 
 @Component({
   components: { Tabs },
@@ -76,6 +75,7 @@ export default class Statistics extends Vue {
       return []
     }
     type Result = { title: string; total?: number; items: RecordItem[] }[]
+    if (!newList.length) return []
     const result: Result = [
       {
         title: dayjs(newList[0].createAt).format('YYYY-MM-DD'),
